@@ -20,9 +20,23 @@ export type StringTuple = Tuple<string>;
 export type NumberTuple = Tuple<number>;
 
 export const partNames = [
-  'nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder',
-  'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist',
-  'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'
+  'nose',
+  'leftEye',
+  'rightEye',
+  'leftEar',
+  'rightEar',
+  'leftShoulder',
+  'rightShoulder',
+  'leftElbow',
+  'rightElbow',
+  'leftWrist',
+  'rightWrist',
+  'leftHip',
+  'rightHip',
+  'leftKnee',
+  'rightKnee',
+  'leftAnkle',
+  'rightAnkle'
 ];
 
 export const NUM_KEYPOINTS = partNames.length;
@@ -31,19 +45,27 @@ export interface NumberDict {
   [jointName: string]: number;
 }
 
-export const partIds =
-    partNames.reduce((result: NumberDict, jointName, i): NumberDict => {
-      result[jointName] = i;
-      return result;
-    }, {}) as NumberDict;
+export const partIds = partNames.reduce(
+  (result: NumberDict, jointName, i): NumberDict => {
+    result[jointName] = i;
+    return result;
+  },
+  {}
+) as NumberDict;
 
 const connectedPartNames: StringTuple[] = [
-  ['leftHip', 'leftShoulder'], ['leftElbow', 'leftShoulder'],
-  ['leftElbow', 'leftWrist'], ['leftHip', 'leftKnee'],
-  ['leftKnee', 'leftAnkle'], ['rightHip', 'rightShoulder'],
-  ['rightElbow', 'rightShoulder'], ['rightElbow', 'rightWrist'],
-  ['rightHip', 'rightKnee'], ['rightKnee', 'rightAnkle'],
-  ['leftShoulder', 'rightShoulder'], ['leftHip', 'rightHip']
+  ['leftHip', 'leftShoulder'],
+  ['leftElbow', 'leftShoulder'],
+  ['leftElbow', 'leftWrist'],
+  ['leftHip', 'leftKnee'],
+  ['leftKnee', 'leftAnkle'],
+  ['rightHip', 'rightShoulder'],
+  ['rightElbow', 'rightShoulder'],
+  ['rightElbow', 'rightWrist'],
+  ['rightHip', 'rightKnee'],
+  ['rightKnee', 'rightAnkle'],
+  ['leftShoulder', 'rightShoulder'],
+  ['leftHip', 'rightHip']
 ];
 
 /*
@@ -53,18 +75,27 @@ const connectedPartNames: StringTuple[] = [
  * child->parent, we can define the tree root as any node.
  */
 export const poseChain: StringTuple[] = [
-  ['nose', 'leftEye'], ['leftEye', 'leftEar'], ['nose', 'rightEye'],
-  ['rightEye', 'rightEar'], ['nose', 'leftShoulder'],
-  ['leftShoulder', 'leftElbow'], ['leftElbow', 'leftWrist'],
-  ['leftShoulder', 'leftHip'], ['leftHip', 'leftKnee'],
-  ['leftKnee', 'leftAnkle'], ['nose', 'rightShoulder'],
-  ['rightShoulder', 'rightElbow'], ['rightElbow', 'rightWrist'],
-  ['rightShoulder', 'rightHip'], ['rightHip', 'rightKnee'],
+  ['nose', 'leftEye'],
+  ['leftEye', 'leftEar'],
+  ['nose', 'rightEye'],
+  ['rightEye', 'rightEar'],
+  ['nose', 'leftShoulder'],
+  ['leftShoulder', 'leftElbow'],
+  ['leftElbow', 'leftWrist'],
+  ['leftShoulder', 'leftHip'],
+  ['leftHip', 'leftKnee'],
+  ['leftKnee', 'leftAnkle'],
+  ['nose', 'rightShoulder'],
+  ['rightShoulder', 'rightElbow'],
+  ['rightElbow', 'rightWrist'],
+  ['rightShoulder', 'rightHip'],
+  ['rightHip', 'rightKnee'],
   ['rightKnee', 'rightAnkle']
 ];
 
 export const connectedPartIndices = connectedPartNames.map(
-    ([jointNameA, jointNameB]) => ([partIds[jointNameA], partIds[jointNameB]]));
+  ([jointNameA, jointNameB]) => [partIds[jointNameA], partIds[jointNameB]]
+);
 
 export const partChannels: string[] = [
   'left_face',
